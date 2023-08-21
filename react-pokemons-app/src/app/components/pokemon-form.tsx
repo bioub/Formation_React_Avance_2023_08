@@ -7,6 +7,7 @@ import {
   deletePokemon,
   updatePokemon,
 } from '../services/pokemon-service';
+import Checkboxes from './checkboxes';
 
 type Props = {
   pokemon: Pokemon;
@@ -323,7 +324,7 @@ function PokemonForm({ pokemon, isEditForm }: Props) {
                 {/* Pokemon types */}
                 <div className="form-group">
                   <label>Types</label>
-                  {types.map((type) => (
+                  {/* {types.map((type) => (
                     <div key={type} style={{ marginBottom: '10px' }}>
                       <label>
                         <input
@@ -341,7 +342,8 @@ function PokemonForm({ pokemon, isEditForm }: Props) {
                         </span>
                       </label>
                     </div>
-                  ))}
+                  ))} */}
+                  <Checkboxes items={types} selected={form.types.value} renderItem={(item) => <p className={formatType(item)}>{item}</p>} />
                 </div>
               </div>
               <div className="card-action center">

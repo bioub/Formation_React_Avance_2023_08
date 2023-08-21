@@ -7,6 +7,8 @@ import PageNotFound from './pages/page-not-found';
 import Login from './pages/login';
 import PrivateRoute from './private-route';
 import PokemonCompare from './pages/pokemon-compare';
+import Hello from './hoc-render-prop/Hello';
+import PassHello from './hoc-render-prop/PassHello';
 
 function App() {
   return (
@@ -15,7 +17,10 @@ function App() {
         <nav>
           <div className="nav-wrapper teal">
             <Link to="/" className="brand-logo center">
-              Pokédex
+              {/* <PassHello>
+                {(hello: any) => <Hello name="Pokedex" hello={hello} />}
+              </PassHello> */}
+              <Hello name="Pokedex" />
             </Link>
           </div>
         </nav>

@@ -1,14 +1,8 @@
 import { useEffect, useState } from "react";
+import { useNow } from "./useNow";
 
 function Clock() {
-    const [now, setNow] = useState(new Date());
-  //  return React.createElement('div', { className: 'Clock' }, (new Date).toLocaleTimeString());
-
-  useEffect(() => {
-      setInterval(() => {
-        setNow(new Date())
-      }, 1000);
-  }, [])
+  const now = useNow(1000);
 
   return (
     <>

@@ -34,6 +34,7 @@ function PokemonList() {
       <div className="container">
         <div className="row">
           <PokemonSearch />
+          {/* <List items={pokemons} renderItem={(item) => <PokemonCard key={item.id} pokemon={item} />} /> */}
           {pokemons.map((pokemon) => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />
           ))}
