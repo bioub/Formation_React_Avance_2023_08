@@ -18,7 +18,7 @@ function PokemonCard({ pokemon }: Props) {
   return (
     <div
       className="col s6 m4"
-      onClick={() => goToPokemon(pokemon.id ?? 0)}
+
     >
       <div className="card horizontal">
         <div className="card-image">
@@ -35,6 +35,7 @@ function PokemonCard({ pokemon }: Props) {
                 {type}
               </span>
             ))}
+            <button onClick={() => goToPokemon(pokemon.id ?? 0)}>Details</button>
           </div>
         </div>
       </div>

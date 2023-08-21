@@ -11,9 +11,11 @@ function Clock() {
   }, [])
 
   return (
+    <>
     <div className="Clock">
         {now.toLocaleTimeString()}
     </div>
+    </>
   );
 }
 

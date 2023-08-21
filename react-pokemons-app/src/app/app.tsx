@@ -6,6 +6,7 @@ import PokemonAdd from './pages/pokemon-add';
 import PageNotFound from './pages/page-not-found';
 import Login from './pages/login';
 import PrivateRoute from './private-route';
+import PokemonCompare from './pages/pokemon-compare';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/pokemons" element={<PokemonsList />} />
             <Route path="/pokemon/add" element={<PokemonAdd />} />
             <Route path="/pokemons/edit/:id" element={<PokemonEdit />} />
+            <Route path="/pokemons/compare" element={<PokemonCompare />} />
             <Route path="/pokemons/:id" element={<PokemonsDetail />} />
           </Route>
           <Route element={<PageNotFound />} />

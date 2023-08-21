@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import {Pokemon} from '../models/pokemon';
 import PokemonCard from '../components/pokemon-card';
 import { getPokemons } from '../services/pokemon-service';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
 import PokemonSearch from '../components/pokemon-search';
 import { isAuthenticated } from '../services/authentication-service';
 
@@ -18,6 +18,7 @@ import { isAuthenticated } from '../services/authentication-service';
 */
 
 function PokemonList() {
+  const navigate = useNavigate();
   if (!isAuthenticated) {
     return <Navigate to={{ pathname: '/login' }} />;
   }
@@ -45,6 +46,7 @@ function PokemonList() {
       >
         <i className="material-icons">add</i>
       </Link>
+      <button onClick={() => navigate('/pokemons/compare')}>Compare</button>
     </div>
   );
 }
