@@ -36,10 +36,10 @@ la `event.stopPropagation()` (pour ne pas déclencher le click des ancetres).
 
 ## Context
 
-Créer un context CompareContext en s'inspirant de l'exemple :
+Créer un context `CompareContext` en s'inspirant de l'exemple :
 [https://github.com/formation-tech/react-communication/tree/master/src/example-context-with-hooks](https://github.com/formation-tech/react-communication/tree/master/src/example-context-with-hooks)
 
-L'idée est de stocker les pokemons à comparer dans le context (en utilisant par exemple un tableau ou un [Set](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set/has)), il faudra limiter à 2 pokemons (vous pouvez augmenter la limite si vous le souhaitez mais il faudra jouer sur le nombre de colonnes dans la page `PokemonCompare`).
+L'idée est de stocker les id des pokemons à comparer dans le context (en utilisant par exemple un tableau), il faudra limiter à 2 pokemons (vous pouvez augmenter la limite si vous le souhaitez mais il faudra jouer sur le nombre de colonnes dans la page `PokemonCompare`).
 
 Dans `src/app/components/pokemon-card.tsx` écouter le click de la carte (là où vous aviez déplacé le onClick dans l'exercice précédent) pour sélectionner ou déselectionner le Pokemon à comparer. Le lien vers la page `/pokemons/compare` ne devrait être actif que s'il y a 2 pokemons à comparer.
 
