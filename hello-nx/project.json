@@ -1,0 +1,72 @@
+{
+  "name": "hello-nx",
+  "$schema": "node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "./src",
+  "projectType": "application",
+  "targets": {
+    "build": {
+      "executor": "@nx/vite:build",
+      "outputs": ["{options.outputPath}"],
+      "defaultConfiguration": "production",
+      "options": {
+        "outputPath": "dist/hello-nx"
+      },
+      "configurations": {
+        "development": {
+          "mode": "development"
+        },
+        "production": {
+          "mode": "production"
+        }
+      }
+    },
+    "serve": {
+      "executor": "@nx/vite:dev-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "hello-nx:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "hello-nx:build:development",
+          "hmr": true
+        },
+        "production": {
+          "buildTarget": "hello-nx:build:production",
+          "hmr": false
+        }
+      }
+    },
+    "preview": {
+      "executor": "@nx/vite:preview-server",
+      "defaultConfiguration": "development",
+      "options": {
+        "buildTarget": "hello-nx:build"
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "hello-nx:build:development"
+        },
+        "production": {
+          "buildTarget": "hello-nx:build:production"
+        }
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["coverage/hello-nx"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "coverage/hello-nx"
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["./src/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  },
+  "tags": []
+}
