@@ -5,6 +5,7 @@ import { getPokemons } from '../services/pokemon-service';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import PokemonSearch from '../components/pokemon-search';
 import { isAuthenticated } from '../services/authentication-service';
+import List from '../components/list';
 
 /*
 {
@@ -34,10 +35,10 @@ function PokemonList() {
       <div className="container">
         <div className="row">
           <PokemonSearch />
-          {/* <List items={pokemons} renderItem={(item) => <PokemonCard key={item.id} pokemon={item} />} /> */}
-          {pokemons.map((pokemon) => (
+          <List items={pokemons} renderItem={(item) => <PokemonCard key={item.id} pokemon={item} />} />
+          {/* {pokemons.map((pokemon) => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />
-          ))}
+          ))} */}
         </div>
       </div>
       <Link

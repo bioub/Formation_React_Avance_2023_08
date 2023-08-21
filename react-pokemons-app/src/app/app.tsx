@@ -9,34 +9,37 @@ import PrivateRoute from './private-route';
 import PokemonCompare from './pages/pokemon-compare';
 import Hello from './hoc-render-prop/Hello';
 import PassHello from './hoc-render-prop/PassHello';
+import { CompareProvider } from './services/compare-context';
 
 function App() {
   return (
     <BrowserRouter>
-      <div>
-        <nav>
-          <div className="nav-wrapper teal">
-            <Link to="/" className="brand-logo center">
-              {/* <PassHello>
+      <CompareProvider>
+        <div>
+          <nav>
+            <div className="nav-wrapper teal">
+              <Link to="/" className="brand-logo center">
+                {/* <PassHello>
                 {(hello: any) => <Hello name="Pokedex" hello={hello} />}
               </PassHello> */}
-              <Hello name="Pokedex" />
-            </Link>
-          </div>
-        </nav>
-        <Routes>
-          <Route index path="/" element={<PokemonsList />} />
-          <Route path="/login" element={<Login />} />
-          <Route element={<PrivateRoute />}>
-            <Route path="/pokemons" element={<PokemonsList />} />
-            <Route path="/pokemon/add" element={<PokemonAdd />} />
-            <Route path="/pokemons/edit/:id" element={<PokemonEdit />} />
-            <Route path="/pokemons/compare" element={<PokemonCompare />} />
-            <Route path="/pokemons/:id" element={<PokemonsDetail />} />
-          </Route>
-          <Route element={<PageNotFound />} />
-        </Routes>
-      </div>
+                <Hello name="Pokedex" />
+              </Link>
+            </div>
+          </nav>
+          <Routes>
+            <Route index path="/" element={<PokemonsList />} />
+            <Route path="/login" element={<Login />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/pokemons" element={<PokemonsList />} />
+              <Route path="/pokemon/add" element={<PokemonAdd />} />
+              <Route path="/pokemons/edit/:id" element={<PokemonEdit />} />
+              <Route path="/pokemons/compare" element={<PokemonCompare />} />
+              <Route path="/pokemons/:id" element={<PokemonsDetail />} />
+            </Route>
+            <Route element={<PageNotFound />} />
+          </Routes>
+        </div>
+      </CompareProvider>
     </BrowserRouter>
   );
 }

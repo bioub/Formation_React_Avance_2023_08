@@ -2,6 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import { Pokemon } from '../models/pokemon';
 import './pokemon-card.css';
 import { formatDate, formatType } from '../helpers';
+import { useContext } from 'react';
+import { CompareContext } from '../services/compare-context';
+import classNames from 'classnames';
 
 type Props = {
   pokemon: Pokemon;
@@ -10,6 +13,7 @@ type Props = {
 
 function PokemonCard({ pokemon }: Props) {
   const navigate = useNavigate();
+  const { ids, selectId } = useContext(CompareContext);
 
   function goToPokemon(id: number) {
     navigate(`/pokemons/${id}`);
@@ -20,7 +24,7 @@ function PokemonCard({ pokemon }: Props) {
       className="col s6 m4"
 
     >
-      <div className="card horizontal">
+      <div className={classNames("card horizontal", { blue: ids.includes(pokemon?.id ?? 0)})}>
         <div className="card-image">
           <img src={pokemon.picture} alt={pokemon.name} />
         </div>
@@ -35,6 +39,7 @@ function PokemonCard({ pokemon }: Props) {
                 {type}
               </span>
             ))}
+            <button onClick={() => selectId(pokemon.id ?? 0)}>Compare</button>
             <button onClick={() => goToPokemon(pokemon.id ?? 0)}>Details</button>
           </div>
         </div>
