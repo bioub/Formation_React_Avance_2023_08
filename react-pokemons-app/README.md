@@ -73,3 +73,39 @@ Dans l'exemple ci-dessus on passe le type `string[]` à items, le type de `eleme
 Dans ce composant List nous allons boucler sur les items et afficher dans le JSX le retour de la fonction `renderItem`, ce JSX sera encapsulé dans un Fragment.
 
 Utiliser ce composant List à la place de `pokemons.map` dans le composant `src/app/pages/pokemon-list.tsx` (on verra demain l'intérêt d'avoir un composant ici)
+
+## Styling
+
+Transformer le fichier `src/app/components/pokemon-card.css` en module CSS
+
+Utiliser classnames et le nom de classe généré par le module pour l'élément `<div className="card horizontal">` (il faudra garder horizontal + le horizontal généré par le module.css)
+
+## React-i18next
+
+Installer react-i18next en dependency et i18next-parser en devDependency
+
+Configurer i18next dans le fichier `main.tsx` comme dans les slides.
+
+Utiliser le hook useTranslation pour traduire les textes présent dans login.tsx (utiliser les clés suivantes) :
+- Vous êtes déconnecté. (pikachu / pikachu) : `login.banner.default`
+- 👉 Tentative de connexion en cours ... : `login.banner.loading`
+- 🔐 Identifiant ou mot de passe incorrect. : `login.banner.error`
+- Votre prénom doit faire au moins 3 caractères de long. : `login.firstName.error`
+- Votre mot de passe doit faire au moins 6 caractères de long. : `login.password.error`
+- Identifiant : `login.username`
+- Mot de passe : `login.password`
+- Valider : `login.button`
+
+Configurer et extraire les clés de traduction avec `i18next-parser` comme dans les slides (`fr` et `en`)
+
+Remplir les fichiers de traduction.
+
+Créer 2 boutons `fr` et `en` dans le menu pokedex dans `app.tsx`, changer la langue au click de ces boutons (`i18n.changeLanguage('fr')`)
+
+## (Bonus) react-hook-form
+
+Utiliser react-hook-form pour gérer le formulaire de login et les erreurs sur le prénom et le mot de passe.
+
+https://www.react-hook-form.com/get-started/#Applyvalidation
+
+

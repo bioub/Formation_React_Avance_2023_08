@@ -104,7 +104,7 @@ function Login() {
         <div className="col s12 m8 offset-m2">
           <div className="card hoverable">
             <div className="card-stacked">
-              <div className="card-content">
+              <div className="card-content active">
                 {/* Form message */}
                 {message && (
                   <div className="form-group">
