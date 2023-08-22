@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import {Pokemon} from '../models/pokemon';
 import PokemonCard from '../components/pokemon-card';
-import { getPokemons } from '../services/pokemon-service';
+import { getPokemons, searchPokemon } from '../services/pokemon-service';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
 import PokemonSearch from '../components/pokemon-search';
 import { isAuthenticated } from '../services/authentication-service';
@@ -19,23 +19,33 @@ import List from '../components/list';
 */
 
 function PokemonList() {
+  console.log('PokemonList');
+
+
   const navigate = useNavigate();
   if (!isAuthenticated) {
     return <Navigate to={{ pathname: '/login' }} />;
   }
+
+  const [term, setTerm] = useState('');
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {
-    getPokemons().then((pokemons) => setPokemons(pokemons));
+    searchPokemon('').then((pokemons) =>
+      setPokemons(pokemons)
+    );
   }, []);
+
+  // const renderItem = useMemo(() => (item: Pokemon) => <PokemonCard key={item.id} pokemon={item} />, [term])
+  const renderItem = useCallback((item: Pokemon) => <PokemonCard key={item.id} pokemon={item} />, [])
 
   return (
     <div>
       <h1 className="center">Pokédex</h1>
       <div className="container">
         <div className="row">
-          <PokemonSearch />
-          <List items={pokemons} renderItem={(item) => <PokemonCard key={item.id} pokemon={item} />} />
+          <PokemonSearch term={term} onType={setTerm} />
+          <List items={pokemons} renderItem={renderItem} />
           {/* {pokemons.map((pokemon) => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />
           ))} */}

@@ -14,6 +14,8 @@ type Form = {
   password: Field;
 };
 
+// t('login.banner.loading')
+
 function Login() {
   const navigate = useNavigate();
 

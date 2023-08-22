@@ -4,7 +4,17 @@ import styles from './clock.module.css';
 
 
 function Clock() {
-  const now = useNow(1000);
+  const [now, setNow] = useState(new Date());
+
+  useEffect(() => {
+      const interval = setInterval(() => {
+        setNow(new Date())
+      }, 1000);
+      return ()=> {
+        clearInterval(interval)
+      }
+  }, [])
+
 
   return (
     <>

@@ -123,4 +123,11 @@ export const POKEMONS: Pokemon[] = [
   },
 ];
 
+for (let i = 0; i < 500; i++) {
+  for (let j = 0; j < 12; j++) {
+    const pokemon = POKEMONS[j];
+    POKEMONS.push({...pokemon, id: (pokemon.id ?? 0) * (i+1)})
+  }
+}
+
 export default POKEMONS;

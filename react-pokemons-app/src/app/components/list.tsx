@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { memo, ReactNode } from 'react';
 
 type Props<T> = {
   items: T[];
@@ -6,6 +6,7 @@ type Props<T> = {
 };
 
 function List<T>({ items, renderItem }: Props<T>) {
+  console.log('List');
   return (
     <>
       {items.map((item, index) => (
@@ -15,4 +16,5 @@ function List<T>({ items, renderItem }: Props<T>) {
   );
 }
 
-export default List;
+//export default memo(List, (prevProps, nextProps) => prevProps.items === nextProps.items);
+export default memo(List);

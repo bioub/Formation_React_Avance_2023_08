@@ -76,7 +76,7 @@ export async function addPokemon(pokemon: Pokemon): Promise<Pokemon> {
 }
 
 export async function searchPokemon(term: string): Promise<Pokemon[]> {
-  if (import.meta.env.DEV) {
+  if (!import.meta.env.DEV) {
     const response = await fetch(`http://localhost:3001/pokemons?q=${term}`);
     return await response.json();
   }

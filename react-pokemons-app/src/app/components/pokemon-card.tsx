@@ -12,6 +12,7 @@ type Props = {
 };
 
 function PokemonCard({ pokemon }: Props) {
+  console.log('PokemonCard');
   const navigate = useNavigate();
   const { ids, selectId } = useContext(CompareContext);
 

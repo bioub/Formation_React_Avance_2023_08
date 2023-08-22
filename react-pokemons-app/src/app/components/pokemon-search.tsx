@@ -3,22 +3,16 @@ import { Link } from 'react-router-dom';
 import { Pokemon } from '../models/pokemon';
 import { searchPokemon } from '../services/pokemon-service';
 
-function PokemonSearch() {
-  const [term, setTerm] = useState('');
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
+type Props = {
+  term: string;
+  onType(v: string): void;
+}
 
+function PokemonSearch({ term, onType }: Props) {
+  console.log('PokemonSearch');
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const term = event.target.value;
-    setTerm(term);
-
-    if (term.length <= 1) {
-      setPokemons([]);
-      return;
-    }
-
-    searchPokemon(term).then((pokemons) =>
-      setPokemons(pokemons)
-    );
+    onType(term);
   }
 
   return (
@@ -33,17 +27,6 @@ function PokemonSearch() {
                 value={term}
                 onChange={(e) => handleInputChange(e)}
               />
-            </div>
-            <div className="collection">
-              {pokemons.map((pokemon) => (
-                <Link
-                  key={pokemon.id}
-                  to={`/pokemons/${pokemon.id}`}
-                  className="collection-item"
-                >
-                  {pokemon.name}
-                </Link>
-              ))}
             </div>
           </div>
         </div>
