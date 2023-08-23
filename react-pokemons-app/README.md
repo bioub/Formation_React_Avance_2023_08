@@ -152,3 +152,5 @@ Utiliser `pokemonsSelector` pour récupérer les `idsToCompare` dans `PokemonCar
 Créer un sélecteur `pokemonsToCompareSelector` qui transforme la clé `idsToCompare` du state en tableau de pokemon à comparer. Appeler ce selecteur dans `PokemonCompare`, appeler `getPokemons` en faisant les bons `dispatch` au cas où la personne accède à la page `/pokemons/compare` sans passer par la liste.
 
 Utiliser `createSelector` pour ne pas réexécuter `pokemonsToCompareSelector` si `idsToCompare` et `items` ne changent pas.
+
+Bonus : installer et configurer Redux Persist https://github.com/rt2zz/redux-persist

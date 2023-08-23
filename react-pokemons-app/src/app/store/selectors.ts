@@ -13,3 +13,12 @@ export const pokemonsListSelector = createSelector(
     return items.filter((item) => item.name?.includes(term) ?? true);
   }
 );
+
+export const pokemonsToCompareSelector = createSelector(
+  (state: State) => pokemonsSelector(state).items,
+  (state: State) => pokemonsSelector(state).idsToCompare,
+  (items, idsToCompare) => {
+    console.log('pokemonsToCompareSelector');
+    return idsToCompare.map((id) => items.find((item) => item.id === id))
+  }
+);

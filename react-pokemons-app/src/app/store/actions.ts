@@ -7,7 +7,7 @@ import { Pokemon } from '../models/pokemon';
 import { searchPokemon } from '../services/pokemon-service';
 
 export const updateTerm = createAction<string>('@pokemons/updateTerm');
-
+export const selectId = createAction<number>('@pokemons/selectId');
 /*
 export const fetchPokemons = createAction('@pokemons/fetchPokemons');
 export const fetchPokemonsSuccess = createAction<Pokemon[]>('@pokemons/fetchPokemonsSuccess');

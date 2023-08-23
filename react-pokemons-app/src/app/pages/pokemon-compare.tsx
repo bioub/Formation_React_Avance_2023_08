@@ -6,24 +6,21 @@ import { isAuthenticated } from '../services/authentication-service';
 import { getPokemon } from '../services/pokemon-service';
 import PokemonCardDetails from '../components/pokemon-card-details';
 import { CompareContext } from '../services/compare-context';
+import { useSelector } from 'react-redux';
+import { pokemonsToCompareSelector } from '../store/selectors';
 
 function PokemonCompare() {
-  const { ids } = useContext(CompareContext);
-  const [pokemon1, setPokemon1] = useState<Pokemon | undefined>();
-  const [pokemon2, setPokemon2] = useState<Pokemon | undefined>();
-
-  useEffect(() => {
-    getPokemon(ids[0]).then((pokemon) => setPokemon1(pokemon));
-    getPokemon(ids[1]).then((pokemon) => setPokemon2(pokemon));
-  }, []);
+  const pokemons = useSelector(pokemonsToCompareSelector);
 
   if (!isAuthenticated) {
     return <Navigate to={{ pathname: '/login' }} />;
   }
 
-  if (ids.length !== 2) {
+  if (pokemons.length !== 2) {
     return <Navigate to={{ pathname: '/' }} />;
   }
+
+  const [pokemon1, pokemon2] = pokemons;
 
   return (
     <div className="row">
