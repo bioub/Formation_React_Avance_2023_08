@@ -8,13 +8,20 @@ import Login from './pages/login';
 import PrivateRoute from './private-route';
 import PokemonCompare from './pages/pokemon-compare';
 import Hello from './hoc-render-prop/Hello';
-import PassHello from './hoc-render-prop/PassHello';
-import { CompareProvider } from './services/compare-context';
+import { Provider } from 'react-redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { pokemonsReducer, State } from './store/reducers';
+
+const store = configureStore<State>({
+  reducer: {
+    pokemons: pokemonsReducer,
+  },
+});
 
 function App() {
   return (
     <BrowserRouter>
-      <CompareProvider>
+      <Provider store={store}>
         <div>
           <nav>
             <div className="nav-wrapper teal">
@@ -39,7 +46,7 @@ function App() {
             <Route element={<PageNotFound />} />
           </Routes>
         </div>
-      </CompareProvider>
+      </Provider>
     </BrowserRouter>
   );
 }

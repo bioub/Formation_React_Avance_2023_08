@@ -6,6 +6,9 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import PokemonSearch from '../components/pokemon-search';
 import { isAuthenticated } from '../services/authentication-service';
 import List from '../components/list';
+import { useDispatch, useSelector } from 'react-redux';
+import { pokemonsSelector } from "../store/selectors";
+import { updateTerm } from '../store/actions';
 
 /*
 {
@@ -27,7 +30,14 @@ function PokemonList() {
     return <Navigate to={{ pathname: '/login' }} />;
   }
 
-  const [term, setTerm] = useState('');
+  // const [term, setTerm] = useState('');
+  const { term } = useSelector(pokemonsSelector);
+  const dispatch = useDispatch();
+
+  function setTerm(term: string) {
+    dispatch(updateTerm(term));
+  }
+
   const [pokemons, setPokemons] = useState<Pokemon[]>([]);
 
   useEffect(() => {

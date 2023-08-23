@@ -1,10 +1,10 @@
 import React from 'react';
-import Profile from './Profile';
+import ProfileContainer from './ProfileContainer';
 
 function Main() {
   return (
     <div className="Main">
-      <Profile />
+      <ProfileContainer />
     </div>
   );
 }

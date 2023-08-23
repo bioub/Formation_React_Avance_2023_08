@@ -1,19 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
-function Profile({ name, dispatch }) {
+function Profile({ name, onUpdate }) {
   return (
     <div className="Profile">
       <h2>Profile</h2>
       <form
         onSubmit={(event) => {
           event.preventDefault();
-          dispatch({
-            type: 'UPDATE_USER',
-            payload: {
-              name: event.target.name.value,
-            },
-          });
+          onUpdate(event.target.value)
         }}
       >
         <p>
@@ -28,10 +22,4 @@ function Profile({ name, dispatch }) {
   );
 }
 
-function mapStateToProps(state) {
-  return {
-    name: state.name,
-  };
-}
-
-export default connect(mapStateToProps)(Profile);
+export default Profile;
