@@ -4,9 +4,10 @@ describe('template spec', () => {
   it('passes', () => {
     cy.visit('http://localhost:4200/');
     cy.get('input[name=username]').type('pikachu');
+    cy.get('input[name=password]').type('pikachu');
 
-    // Compléter le password
-    // Clicker sur le bouton
-    // Vérifier que la page Pokédex s'affiche
+    cy.get('button').click();
+
+    cy.location('pathname').should('equal', '/pokemons');
   })
 })
