@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo, useCallback } from 'react';
-import {Pokemon} from '../models/pokemon';
+import { Pokemon } from '../models/pokemon';
 import PokemonCard from '../components/pokemon-card';
 import { getPokemons, searchPokemon } from '../services/pokemon-service';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
@@ -7,8 +7,14 @@ import PokemonSearch from '../components/pokemon-search';
 import { isAuthenticated } from '../services/authentication-service';
 import List from '../components/list';
 import { useDispatch, useSelector } from 'react-redux';
-import { pokemonsSelector } from "../store/selectors";
-import { updateTerm } from '../store/actions';
+import { pokemonsListSelector, pokemonsSelector } from '../store/selectors';
+import {
+  fetchPokemons,
+  fetchPokemonsRequested,
+  fetchPokemonsSuccess,
+  updateTerm,
+} from '../store/actions';
+import Loader from '../components/loader';
 
 /*
 {
@@ -24,30 +30,29 @@ import { updateTerm } from '../store/actions';
 function PokemonList() {
   console.log('PokemonList');
 
-
   const navigate = useNavigate();
   if (!isAuthenticated) {
     return <Navigate to={{ pathname: '/login' }} />;
   }
 
   // const [term, setTerm] = useState('');
-  const { term } = useSelector(pokemonsSelector);
+  const { term, loading } = useSelector(pokemonsSelector);
+  const items = useSelector(pokemonsListSelector);
   const dispatch = useDispatch();
 
   function setTerm(term: string) {
     dispatch(updateTerm(term));
   }
 
-  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
-
   useEffect(() => {
-    searchPokemon('').then((pokemons) =>
-      setPokemons(pokemons)
-    );
+    dispatch(fetchPokemonsRequested('') as any);
   }, []);
 
   // const renderItem = useMemo(() => (item: Pokemon) => <PokemonCard key={item.id} pokemon={item} />, [term])
-  const renderItem = useCallback((item: Pokemon) => <PokemonCard key={item.id} pokemon={item} />, [])
+  const renderItem = useCallback(
+    (item: Pokemon) => <PokemonCard key={item.id} pokemon={item} />,
+    []
+  );
 
   return (
     <div>
@@ -55,7 +60,13 @@ function PokemonList() {
       <div className="container">
         <div className="row">
           <PokemonSearch term={term} onType={setTerm} />
-          <List items={pokemons} renderItem={renderItem} />
+          {loading ? (
+            <h4 className="center">
+              <Loader />
+            </h4>
+          ) : (
+            <List items={items} renderItem={renderItem} />
+          )}
           {/* {pokemons.map((pokemon) => (
             <PokemonCard key={pokemon.id} pokemon={pokemon} />
           ))} */}

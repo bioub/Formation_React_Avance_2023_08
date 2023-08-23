@@ -1,9 +1,12 @@
-import { createReducer } from "@reduxjs/toolkit";
-import { Pokemon } from "../models/pokemon";
-import { updateTerm } from "./actions";
+import { createReducer } from '@reduxjs/toolkit';
+import { Pokemon } from '../models/pokemon';
+import {
+  fetchPokemonsRequested,
+  updateTerm,
+} from './actions';
 
 export interface State {
-  pokemons: PokemonsState
+  pokemons: PokemonsState;
 }
 
 interface PokemonsState {
@@ -17,11 +20,22 @@ const initialState: State = {
     term: '',
     items: [],
     loading: false,
-  }
+  },
 };
 
-export const pokemonsReducer = createReducer(initialState.pokemons, (builder) => {
-  builder.addCase(updateTerm, (state, action) => {
-    state.term = action.payload;
-  })
-});
+export const pokemonsReducer = createReducer(
+  initialState.pokemons,
+  (builder) => {
+    builder
+      .addCase(updateTerm, (state, action) => {
+        state.term = action.payload;
+      })
+      .addCase(fetchPokemonsRequested.pending, (state, action) => {
+        state.loading = true;
+      })
+      .addCase(fetchPokemonsRequested.fulfilled, (state, action) => {
+        state.loading = false;
+        state.items = action.payload;
+      });
+  }
+);
