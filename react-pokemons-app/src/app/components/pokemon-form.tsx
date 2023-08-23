@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Pokemon, pokemonTypes } from '../models/pokemon';
 import { formatType } from '../helpers';
