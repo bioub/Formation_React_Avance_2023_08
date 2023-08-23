@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Pokemon, pokemonTypes } from '../models/pokemon';
 import { formatType } from '../helpers';
@@ -7,7 +7,7 @@ import {
   deletePokemon,
   updatePokemon,
 } from '../services/pokemon-service';
-import Checkboxes from './checkboxes';
+import MultiSelect from './multi-select';
 
 type Props = {
   pokemon: Pokemon;
@@ -27,6 +27,22 @@ type Form = {
   cp: Field;
   types: Field;
 };
+
+const renderValues = (values: string[]) => (
+  <>
+    {values.map((value) => (
+      <div className={formatType(value as pokemonTypes)}>
+        {value}
+      </div>
+    ))}
+  </>
+);
+
+const renderItem = (item: string) => (
+  <div className={formatType(item as pokemonTypes)}>
+    {item}
+  </div>
+);
 
 function PokemonForm({ pokemon, isEditForm }: Props) {
   const navigate = useNavigate();
@@ -57,27 +73,12 @@ function PokemonForm({ pokemon, isEditForm }: Props) {
     return form.types.value.includes(type);
   }
 
-  function selectType(
-    type: pokemonTypes,
-    event: React.ChangeEvent<HTMLInputElement>
-  ): void {
-    const checked = event.target.checked;
-    let newField: Field;
-
-    if (checked) {
-      // Si l'utilisateur coche un type, à l'ajoute à la liste des types du pokémon.
-      const newTypes: string[] = form.types.value.concat([type]);
-      newField = { value: newTypes };
-    } else {
-      // Si l'utilisateur décoche un type, on le retire de la liste des types du pokémon.
-      const newTypes: string[] = form.types.value.filter(
-        (currentType: string) => currentType !== type
-      );
-      newField = { value: newTypes };
-    }
-
-    setForm({ ...form, ...{ types: newField } });
-  }
+  const handleSelect = useCallback((newSelection: string[]) => {
+    setForm({
+      ...form,
+      ...{ types: { value: newSelection } },
+    });
+  }, [form]);
 
   function handleInputChange(event: React.ChangeEvent<HTMLInputElement>): void {
     const fieldName: string = event.target.name;
@@ -343,7 +344,14 @@ function PokemonForm({ pokemon, isEditForm }: Props) {
                       </label>
                     </div>
                   ))} */}
-                  <Checkboxes items={types} selected={form.types.value} renderItem={(item) => <p className={formatType(item)}>{item}</p>} />
+                  {/* <Checkboxes items={types} selected={form.types.value} renderItem={(item) => <p className={formatType(item)}>{item}</p>} /> */}
+                  <MultiSelect
+                    items={types}
+                    selected={form.types.value}
+                    renderValues={renderValues}
+                    renderItem={renderItem}
+                    onSelect={handleSelect}
+                  />
                 </div>
               </div>
               <div className="card-action center">
